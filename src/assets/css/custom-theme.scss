@@ -1,0 +1,21 @@
+.text {
+  &-cus-red {
+    color: $main-color;
+    text-decoration: none;
+  }
+  &-title-black {
+    color: $title-color;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px; /* 12px */
+    &:hover {
+      color: $main-color;
+    }
+  }
+  &-meta-grey {
+    color: $meta-color;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+}
