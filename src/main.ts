@@ -17,18 +17,17 @@ import './assets/css/main.scss';
 import 'animate.css';
 import router from './router';
 import { registerGlobalComponent } from './global';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faUserSecret);
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { fab } from '@fortawesome/free-brands-svg-icons'
 
+library.add(fab)
 const app = createApp(App);
 app.use(router);
 app.use(registerGlobalComponent);
-app.component('font-awesome-icon', FontAwesomeIcon);
+app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(Button);
-
 app.use(Checkbox);
 app.use(Input);
 app.use(Form);
@@ -37,7 +36,6 @@ app.use(Spin);
 app.use(Modal);
 app.use(Space);
 
-// app.use(CanvasJSChart);
 app.use(ConfigProvider);
 app.config.globalProperties.$dayjs = dayjs;
 

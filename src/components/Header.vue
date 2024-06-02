@@ -2,20 +2,17 @@
     <div class="">
         <!-- nav-top -->
         <div class="md:block hidden nav-top text-[#666] w-full">
-            <div class="container px-6 mx-auto flex justify-between items-center">
+            <div class="container-content px-6 mx-auto flex justify-between items-center">
                 <div class="">
                 </div>
-                <div class="">
-                    <button>login</button>
-                    <select name="lg" id="" class="">
-                        <option selected value="vn">Việt Nam</option>
-                        <option value="en">English</option>
-                    </select>
+                <div class=" flex gap-3">
+                    <a href="/login">login</a>
+                    <a href="/sigin">singin</a>
                 </div>
             </div>
         </div>
-        <nav v-if="{ isOpen: false }" class="relative bg-white shadow w-full container mx-auto">
-            <div class="container px-6 py-3 mx-auto">
+        <nav v-if="{ isOpen: false }" class="relative bg-white shadow w-full  mx-auto">
+            <div class="container-content px-6 py-3 mx-auto">
                 <div class="flex flex-col md:flex-row md:justify-between md:items-center">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
@@ -36,16 +33,15 @@
                                     </span>
 
                                     <input type="text"
-                                        class="w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-md focus:border-blue-400  focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
-                                        placeholder="Tìm kiem">
+                                        class="w-full py-2 pl-10 pr-4 text-gray-700 bg-white boder-gray rounded-md focus:border-blue-400  focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
+                                        placeholder="Tìm kiếm">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Mobile menu button -->
                         <div class="flex md:hidden">
-                            <button x-cloak @click="isOpen = !isOpen" type="button"
-                                class="text-gray-500"
+                            <button x-cloak @click="isOpen = !isOpen" type="button" class="text-gray-500"
                                 aria-label="toggle menu">
                                 <svg v-if="!isOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -82,7 +78,7 @@
                                 </span>
 
                                 <input type="text"
-                                    class="w-full py-2 pl-10 pr-4 text-gray-700 bg-white border rounded-md focus:border-blue-400  focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
+                                    class="w-full py-2 pl-10 pr-4 text-gray-700 bg-white boder-gray rounded-md focus:border-blue-400  focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
                                     placeholder="Tìm kiếm">
                             </div>
                         </div>
@@ -104,10 +100,11 @@ import { ref } from 'vue';
 
 const isOpen = ref<boolean>(true)
 const objMenu = ref([
-    { name: 'Home', link: '/' },
-    { name: 'Blog', link: '/blog' },
-    { name: 'Galleries', link: '/galleries' },
-    { name: 'Courses', link: '/courses' },
+    { name: 'Trang chủ', link: '/' },
+    { name: 'Tin tức', link: '/blog' },
+    { name: 'Đăng bài', link: '/create-post' },
+    { name: 'Danh mục', link: '/category' },
+    { name: 'Liên hệ', link: '/contact' },
 ]);
 </script>
 <style>
