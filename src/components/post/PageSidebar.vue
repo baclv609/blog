@@ -53,18 +53,7 @@ const arrCategory = ref([
 <template>
     <div>
         <div class="">
-            <!-- widget__tags -->
-            <div class="widget__tags">
-                <div class="widget__header pb-1 mb-5">
-                    <h3 class="text-[#363636] text-xl mb-0 font-semibold">Thẻ</h3>
-                </div>
-                <div class="widget__content">
-                    <p class="flex flex-wrap gap-[10px]">
-                        <a v-for="(item, index) in arrTagLink" :href="`/tag/${item.link}`" :key="index"
-                            class="bg-[#AF0F26] no-underline text-white text-[12px] px-4 py-1">{{ item.nameTag }}</a>
-                    </p>
-                </div>
-            </div>
+
             <!-- widget--category -->
             <div class="widget__category mb-7">
                 <div class="widget__category__header pb-1 mb-5">
@@ -79,7 +68,18 @@ const arrCategory = ref([
                     </ul>
                 </div>
             </div>
-
+            <!-- widget__tags -->
+            <div class="widget__tags">
+                <div class="widget__header pb-1 mb-5">
+                    <h3 class="text-[#363636] text-xl mb-0 font-semibold">Thẻ</h3>
+                </div>
+                <div class="widget__content">
+                    <p class="flex flex-wrap gap-[10px]">
+                        <a v-for="(item, index) in arrTagLink" :href="`/tag/${item.link}`" :key="index"
+                            class="bg-[#AF0F26] no-underline text-white text-[12px] px-4 py-1">{{ item.nameTag }}</a>
+                    </p>
+                </div>
+            </div>
             <!-- Follow us -->
             <div class="widget__follow-us">
                 <div class="widget__follow-us__header pb-1 mb-5">
@@ -142,15 +142,15 @@ const arrCategory = ref([
 <style lang="scss">
 .widget {
     &__category__content {
-      li {
-        a {
-          &:hover {
-            transform: translateX(10px);
-            transition: transform 0.3s ease;
-            color: #AF0F26;
-          }
+        li {
+            a {
+                &:hover {
+                    transform: translateX(10px);
+                    transition: transform 0.3s ease;
+                    color: #AF0F26;
+                }
+            }
         }
-      }
     }
-  }
+}
 </style>

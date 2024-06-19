@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import Header from '../Header.vue';
-import Footer from '../Footer.vue';
+import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue';
+
 </script>
 <template>
   <div>
@@ -10,7 +11,7 @@ import Footer from '../Footer.vue';
     </div>
 
     <div>
-      <Footer/>
+      <Footer />
     </div>
   </div>
 </template>

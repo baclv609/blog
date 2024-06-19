@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import RecentPosts from '@/components/post/RecentPosts.vue'
-import PageSidebar from '@/components/post/PageSidebar.vue'
+import LatestNews from '@/components/post/LatestNews.vue'
+import ExplorebyCategories from '@/components/ExplorebyCategories.vue';
 
 const arrItems = ref([
     {
@@ -117,7 +118,8 @@ const arrItemPosts = ref([
             <div class="container-content">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-sm font-semibold h-7 px-4 bg-[#EFF0F4] leading-7">Công nghệ</h3>
-                    <a href="#" class="text-sm font-semibold text-cus-red h-7 px-4 bg-[#EFF0F4] leading-7">Xem tất cả</a>
+                    <a href="#" class="text-sm font-semibold text-cus-red h-7 px-4 bg-[#EFF0F4] leading-7">Xem tất
+                        cả</a>
                 </div>
                 <div>
                     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4 sm:gap-5">
@@ -142,15 +144,15 @@ const arrItemPosts = ref([
         </section>
 
         <!-- WHAT'S NEW? -->
-        <!-- <section class="mt-[30px] py-[25px] w-full">
+        <section class="mt-[30px] py-[25px] w-full">
             <div class="container-content">
-                <div class="flex justify-between items-center mb-6">
+                <!-- <div class="flex justify-between items-center mb-6">
                     <h3 class="text-sm font-semibold h-7 px-4 bg-[#EFF0F4] leading-7">WHAT'S NEW?</h3>
                     <a href="#" class="text-sm font-semibold text-cus-red h-7 px-4 bg-[#EFF0F4] leading-7">View all</a>
-                </div>
+                </div> -->
 
             </div>
-        </section> -->
+        </section>
         <RecentPosts :dataPosts="arrItemPosts" />
         <div>
             <div>
@@ -160,6 +162,13 @@ const arrItemPosts = ref([
                 <!-- <PageSidebar /> -->
             </div>
         </div>
+
+        <section>
+            <ExplorebyCategories />
+        </section>
+        <section>
+            <LatestNews />
+        </section>
     </div>
 </template>
 

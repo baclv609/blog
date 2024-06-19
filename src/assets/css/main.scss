@@ -2,3 +2,6 @@
 @import './base.scss';
 @import './custom-theme.scss';
 @import './font.scss';
+// @use ' ../node_modules/scss-reset/src/scss/_reset.scss ';
+@import '../node_modules/scss-reset/src/scss/_reset.scss';
+// @use  ' scss-reset/reset ' ;

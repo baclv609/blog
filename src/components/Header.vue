@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="nav-top">
         <!-- nav-top -->
         <div class="md:block hidden nav-top text-[#666] w-full">
             <div class="container-content px-6 mx-auto flex justify-between items-center">
@@ -60,9 +60,9 @@
                     <div :class="[isOpen ? 'translate-x-0 opacity-100 ' : 'opacity-0 -translate-x-full']"
                         class="absolute inset-x-0 z-20 w-full px-6 py-2 transition-all duration-300 ease-in-out bg-white top-[60px]  md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:flex md:items-center">
                         <div class="flex flex-col md:flex-row md:mx-1">
-                            <a v-for="item in objMenu"
+                            <router-link  v-for="item in objMenu"
                                 class="my-2 text-sm leading-5 text-gray-700 transition-colors duration-300 transform md:mx-4 md:my-0 no-underline"
-                                :href="item.link">{{ item.name }}</a>
+                                :to="item.link">{{ item.name }}</router-link >
                         </div>
 
                         <!-- Search input on mobile screen -->
@@ -99,18 +99,18 @@
 import { ref } from 'vue';
 
 const isOpen = ref<boolean>(true)
-const objMenu = ref([
+const objMenu = ref<any>([
     { name: 'Trang chủ', link: '/' },
     { name: 'Tin tức', link: '/blog' },
-    { name: 'Đăng bài', link: '/create-post' },
-    { name: 'Danh mục', link: '/category' },
+    { name: 'Đăng bài', link: '/listBlog' },
+    { name: 'Chủ đề', link: '/category' },
     { name: 'Liên hệ', link: '/contact' },
 ]);
 </script>
-<style>
+<style scoped>
 .scroll-hidden::-webkit-scrollbar {
     height: 0px;
     background: transparent;
-    /* make scrollbar transparent */
 }
+
 </style>
