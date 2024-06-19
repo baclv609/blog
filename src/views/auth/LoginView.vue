@@ -1,5 +1,20 @@
-<script setup>
+<script lang="ts" setup>
+import { reactive } from 'vue';
+import { dataFormLogin } from '@/@types';
 
+const formState = reactive<dataFormLogin>({
+    username: '',
+    password: '',
+    remember: false
+});
+
+const onFinish = (values: any) => {
+    console.log('Success:', values);
+};
+
+const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+};
 </script>
 <template>
     <div class="flex justify-center items-center h-[100vh]">
@@ -9,7 +24,8 @@
                 style="background-image: url('https://images.unsplash.com/photo-1513001900722-370f803f498d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
             </div>
 
-            <div class="w-full px-6 py-8 md:px-8 lg:w-1/2">
+            <a-form layout='vertical' :model="formState" name="basic" @finish="onFinish" @finishFailed="onFinishFailed"
+                class="w-full px-6 py-8 md:px-8 lg:w-1/2">
 
                 <p class="mt-3 text-xl text-center text-gray-600 ">
                     Chào mừng bạn trở lại!
@@ -48,25 +64,21 @@
                     <span class="w-1/5 border-b  lg:w-1/4"></span>
                 </div>
 
-                <div class="mt-4">
-                    <label class="block mb-2 text-sm font-medium text-gray-600 " for="LoggingEmailAddress">Địa chỉ
-                        email</label>
-                    <input id="LoggingEmailAddress"
-                        class="boder-gray block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg  focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
+                <a-form-item label="Địa chỉ
+                        email" name="username" class="mt-4 block mb-2 text-sm font-medium text-gray-600 "
+                    for="username" :rules="[{ required: true, message: 'Vui lòng nhập tên người dùng' }]">
+                    <a-input v-model:value="formState.username" id="LoggingEmailAddress" class="px-4 py-2 text-gray-700"
                         type="email" />
-                </div>
+                </a-form-item>
 
-                <div class="mt-4">
-                    <div class="flex justify-between">
-                        <label class="block mb-2 text-sm font-medium text-gray-600 " for="loggingPassword">Mật
-                            khẩu</label>
-                        <a href="#" class="no-underline text-xs text-blue-500  hover:underline">Quên mật khẩu?</a>
-                    </div>
+                <a-form-item label="Password" name="password" class="mt-4 block mb-2 text-sm font-medium text-gray-600 "
+                    :rules="[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]">
+                    <a-input-password v-model:value="formState.password" class="px-4 py-2" />
+                </a-form-item>
 
-                    <input id="loggingPassword"
-                        class="boder-gray block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg  focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
-                        type="password" />
-                </div>
+                <a-form-item name="remember">
+                    <a-checkbox v-model:checked="formState.remember">Giữ đăng nhập cho những lần sau</a-checkbox>
+                </a-form-item>
 
                 <div class="mt-6">
                     <button
@@ -75,22 +87,21 @@
                     </button>
                 </div>
 
-                <div class="flex items-center justify-between mt-4">
-                    <span class="w-1/5 border-b  md:w-1/4"></span>
+                <div class="flex items-center justify-center flex-col gap-4 mt-4">
+                    <a href="#" class="no-underline text-xs text-blue-500 hover:underline">Quên mật khẩu?</a>
 
                     <a href="/sigin" class="no-underline text-xs text-gray-500 uppercase  hover:underline">HOẶC ĐĂNG KÝ
                     </a>
 
-                    <span class="w-1/5 border-b  md:w-1/4"></span>
                 </div>
-                
-            </div>
-            
-            
+
+            </a-form>
+
+
         </div>
         <div class="absolute bottom-4">
-            <p class="block m-0 text-sm leading-10 text-gray-600">Trải nghiệm không cần đăng ký <router-link
-                    to="/" class="text-sm font-medium text-blue-500 no-underline">bấm tại đây</router-link></p>
+            <p class="block m-0 text-sm leading-10 text-gray-600">Trải nghiệm không cần đăng ký <router-link to="/"
+                    class="text-sm font-medium text-blue-500 no-underline">bấm tại đây</router-link></p>
         </div>
     </div>
 

@@ -8,4 +8,8 @@ export function registerGlobalComponent(app: any) {
     'AuthLayout',
     defineAsyncComponent(() => import('@/layouts/AuthFormLayout.vue')),
   );
+  app.component(
+    'AdminLayout',
+    defineAsyncComponent(() => import('@/layouts/AdminLayout.vue')),
+  );
 }

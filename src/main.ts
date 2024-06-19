@@ -21,7 +21,10 @@ import { registerGlobalComponent } from './global';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-
+// import pinia 
+import { createPinia } from 'pinia'
+const pinia = createPinia()
+import { antd } from "@/plugins";
 library.add(fab)
 const app = createApp(App);
 app.use(router);
@@ -35,6 +38,8 @@ app.use(Card);
 app.use(Spin);
 app.use(Modal);
 app.use(Space);
+app.use(pinia);
+app.use(antd);
 
 app.use(ConfigProvider);
 app.config.globalProperties.$dayjs = dayjs;
