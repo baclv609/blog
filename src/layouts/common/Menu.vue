@@ -93,7 +93,7 @@ export default defineComponent({
             <span>Product</span>
           </span>
         </template>
-        <a-menu-item key="5.1">Admin</a-menu-item>
+        <a-menu-item key="5.1"><router-link to="/admin/auth/all">Admin</router-link></a-menu-item>
         <a-menu-item key="5.2">Biên tập viên</a-menu-item>
         <a-menu-item key="5.2">Người dùng</a-menu-item>
       </a-sub-menu>

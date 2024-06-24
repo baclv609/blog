@@ -43,6 +43,12 @@ const router = createRouter({
       component: () => import('@/views/dashboard/Dashboard.vue'),
     },
     {
+      path: '/admin/auth/all',
+      name: 'auth/all', 
+      meta: { layout: 'Admin' },
+      component: () => import('../views/dashboard/auth/ListAuth.vue'),
+    },
+    {
       path: '/admin/blog',
       name: 'dashboard/blog', 
       meta: { layout: 'Admin' },

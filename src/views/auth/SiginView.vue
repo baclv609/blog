@@ -1,21 +1,71 @@
 <script lang="ts" setup>
 import { reactive } from 'vue';
 import { dataFormResgister } from '@/@types';
+import axios from 'axios';
+import { message } from 'ant-design-vue';
 
-const formState = reactive < dataFormResgister > ({
+const formState = reactive<dataFormResgister>({
     lastName: "",
     firstName: "",
     email: "",
     password: "",
     confirmPassword: "",
-    phone: 0,
+    phone: null,
 });
-const onFinish = (values: any) => {
-    console.log('Success:', values);
-};
 
-const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+
+const rule = {
+    lastName: [
+        { required: true, message: 'Please input your lastName!' },
+        { min: 3, message: 'lastName phải có ít nhất 3 ký tự' },
+        { max: 30, message: 'lastName phải có ít hơn 31 ký tự' },
+    ],
+    firstName: [
+        { required: true, message: 'Please input your firstName!' },
+        { min: 3, message: 'firstName phải có ít nhất 3 ký tự' },
+        { max: 30, message: 'firstName phải có ít hơn 31 ký tự' },
+    ],
+    phone: [
+        { required: true, message: 'Please input your phone!' },
+        { min: 10, message: 'phone phải có ít nhất 10 ký tự' },
+    ],
+    email: [
+        { required: true, message: 'Please input your email!' },
+        { type: 'email', message: 'email không đúng định dạng' },
+    ],
+    password: [
+        { required: true, message: 'Please input your password!' },
+        { min: 6, message: 'password phải có ít nhất 6 ký tự' },
+        { max: 255, message: 'password phải có ít hơn 256 ký tự' },
+    ],
+    confirmPassword: [
+        { required: true, message: 'Please input your confirmPassword!' },
+        { min: 6, message: 'confirmPassword phải có ít nhất 6 ký tự' },
+        {
+            validator: (rule, value, callback) => {
+                if (value !== formState.password) {
+                    callback(new Error('Mật khẩu không khớp'));
+                } else {
+                    callback();
+                }
+            },
+        },
+    ],
+
+}
+const onFinish = async (values: any) => {
+    try {
+        console.log('Success:', values);
+        const res = await axios.post('http://localhost:8000/api/auth/register', values);
+        if (res.status === 200) {
+            message.success('Đăng ký thành công, vui lòng đăng nhập');
+        }
+        else {
+            message.error(res.data.message || 'Đăng ký thất bại');
+        }
+    } catch (e) {
+        message.error(e.response?.data?.message || 'Đã xảy ra lỗi, vui lòng thử lại sau');
+    }
 };
 </script>
 <template>
@@ -39,45 +89,38 @@ const onFinishFailed = (errorInfo: any) => {
                             sơ của mình.
                         </p>
 
-                        <a-form :layout="'vertical'" :model="formState" name="basic" autocomplete="off"
-                            @finish="onFinish" @finishFailed="onFinishFailed"
-                            class="grid grid-cols-1 gap-x-6 gap-y-3 pt-8 md:grid-cols-2">
-                            <a-form-item label="Họ" name="lastName"
-                                :rules="[{ required: true, message: 'Please input your lastName!' }]">
+                        <a-form :layout="'vertical'" :model="formState" :rules="rule" name="basic" autocomplete="off"
+                            @finish="onFinish" class="grid grid-cols-1 gap-x-6 gap-y-3 pt-8 md:grid-cols-2">
+                            <a-form-item label="Họ" name="lastName">
                                 <a-input v-model:value="formState.lastName" class="px-5 py-3" placeholder="John" />
                             </a-form-item>
 
-                            <a-form-item label="Tên" name="firstName"
-                                :rules="[{ required: true, message: 'Please input your firstName!' }]">
+                            <a-form-item label="Tên" name="firstName">
                                 <a-input v-model:value="formState.firstName" class="px-5 py-3" placeholder="Snow" />
                             </a-form-item>
 
-                            <a-form-item label="Số điện thoại" name="phone"
-                                :rules="[{ required: true, message: 'Please input your phone!' }]">
+                            <a-form-item label="Số điện thoại" name="phone">
                                 <a-input v-model:value="formState.phone" class="px-5 py-3"
                                     placeholder="XXX-XX-XXXX-XXX" />
                             </a-form-item>
 
-                            <a-form-item label="Địa chỉ email" name="email"
-                                :rules="[{ required: true, message: 'Please input your email!' }]">
+                            <a-form-item label="Địa chỉ email" name="email">
                                 <a-input v-model:value="formState.email" class="px-5 py-3"
                                     placeholder="johnsnow@example.com" />
                             </a-form-item>
 
-                            <a-form-item label="Mật khẩu" name="password"
-                                :rules="[{ required: true, message: 'Please input your password!' }]">
+                            <a-form-item label="Mật khẩu" name="password">
                                 <a-input-password v-model:value="formState.password" class="px-5 py-3"
                                     placeholder="Nhập mật khẩu của bạn" />
                             </a-form-item>
 
-                            <a-form-item label="Xác nhận mật khẩu" name="confirmPassword"
-                                :rules="[{ required: true, message: 'Please input your confirmPassword!' }]">
+                            <a-form-item label="Xác nhận mật khẩu" name="confirmPassword">
                                 <a-input-password v-model:value="formState.confirmPassword" class="px-5 py-3"
                                     placeholder="Nhập lại mật khẩu của bạn" />
                             </a-form-item>
 
                             <button
-                                class="boder-gray flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                                class="boder-gray flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg">
                                 <span>Đăng ký </span>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 rtl:-scale-x-100"

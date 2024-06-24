@@ -4,7 +4,7 @@ export interface dataFormResgister {
   email: string;
   password: string;
   confirmPassword: string;
-  phone: number | null;
+  phone: 0 | null;
 }
 export interface dataFormLogin {
   username: string;
